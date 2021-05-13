@@ -1,6 +1,106 @@
 class Move {
     public static void moveRobot(Robot robot, int toX, int toY) {
-        robot.stepForward(); // your implementation here
+        if (robot.getX() < toX) {
+            moveRobotToPositiveX(robot, toX);
+        } else if (robot.getX() > toX) {
+            moveRobotToNegativeX(robot, toX);
+        }
+        if (robot.getY() < toY) {
+            moveRobotToPositiveY(robot, toY);
+        } else if (robot.getY() > toY) {
+            moveRobotToNegativeY(robot, toY);
+        }
+    }
+
+    private static void moveRobotToNegativeX(Robot robot, int toX) {
+        if (robot.getDirection() == Direction.LEFT) {
+            moveToNegativeX(robot, toX);
+        } else if (robot.getDirection() == Direction.UP) {
+            robot.turnLeft();
+            moveToNegativeX(robot, toX);
+        } else if (robot.getDirection() == Direction.DOWN) {
+            robot.turnRight();
+            moveToNegativeX(robot, toX);
+        } else {
+            robot.turnLeft();
+            robot.turnLeft();
+            moveToNegativeX(robot, toX);
+        }
+    }
+
+    private static void moveRobotToPositiveX(Robot robot, int toX) {
+        if (robot.getDirection() == Direction.RIGHT) {
+            moveToPositiveX(robot, toX);
+        } else if (robot.getDirection() == Direction.UP) {
+            robot.turnRight();
+            moveToPositiveX(robot, toX);
+        } else if (robot.getDirection() == Direction.DOWN) {
+            robot.turnLeft();
+            moveToPositiveX(robot, toX);
+        } else {
+            robot.turnLeft();
+            robot.turnLeft();
+            moveToPositiveX(robot, toX);
+        }
+    }
+
+    private static void moveRobotToPositiveY(Robot robot, int toY) {
+        if (robot.getDirection() == Direction.UP) {
+            moveToPositiveY(robot, toY);
+        } else if (robot.getDirection() == Direction.LEFT) {
+            robot.turnRight();
+            moveToPositiveY(robot, toY);
+        } else if (robot.getDirection() == Direction.RIGHT) {
+            robot.turnLeft();
+            moveToPositiveY(robot, toY);
+        } else {
+            robot.turnLeft();
+            robot.turnLeft();
+            moveToPositiveY(robot, toY);
+        }
+    }
+
+    private static void moveRobotToNegativeY(Robot robot, int toY) {
+        if (robot.getDirection() == Direction.DOWN) {
+            moveToNegativeY(robot, toY);
+        } else if (robot.getDirection() == Direction.LEFT) {
+            robot.turnLeft();
+            moveToNegativeY(robot, toY);
+        } else if (robot.getDirection() == Direction.RIGHT) {
+            robot.turnRight();
+            moveToNegativeY(robot, toY);
+        } else {
+            robot.turnLeft();
+            robot.turnLeft();
+            moveToNegativeY(robot, toY);
+        }
+    }
+
+    private static void moveToPositiveX(Robot robot, int toX) {
+        int moves = toX - robot.getX();
+        for (int i = 0; i < moves; i++) {
+            robot.stepForward();
+        }
+    }
+
+    private static void moveToNegativeX(Robot robot, int toX) {
+        int moves = robot.getX() - toX;
+        for (int i = 0; i < moves; i++) {
+            robot.stepForward();
+        }
+    }
+    private static void moveToPositiveY(Robot robot, int toY) {
+        int moves = toY - robot.getY();
+        for (int i = 0; i < moves; i++) {
+            robot.stepForward();
+        }
+    }
+
+    private static void moveToNegativeY(Robot robot, int toY) {
+        int moves = robot.getY() - toY;
+        for (int i = 0; i < moves; i++) {
+            robot.stepForward();
+        }
     }
 }
 

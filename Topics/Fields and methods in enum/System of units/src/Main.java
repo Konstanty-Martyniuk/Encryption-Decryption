@@ -10,6 +10,7 @@ enum SI {
         this.quantityName = quantityName;
     }
 
-    // implement getQuantity() method here
-
+    public String getQuantity() {
+        return quantityName;
+    }
 }
